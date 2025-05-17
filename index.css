@@ -206,7 +206,7 @@ fieldset {
   &.battle2-1 {
     background-color: #b95551;
 
-    & > :last-child {
+    & > :only-child {
       --w: 300px;
       width: var(--w);
       aspect-ratio: 1/0.5;
@@ -260,7 +260,7 @@ fieldset {
   &.battle2-2 {
     background-color: #b95551;
 
-    & > :last-child {
+    & > :only-child {
       width: 75%;
       min-width: 250px;
       aspect-ratio: 1/0.5;
