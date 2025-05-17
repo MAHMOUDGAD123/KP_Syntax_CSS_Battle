@@ -1,0 +1,289 @@
+:root {
+  interpolate-size: allow-keywords;
+  font-family: monospace;
+}
+
+*,
+*::before,
+*::after {
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  background-color: #333;
+  padding: 0 10px 10px 10px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  counter-reset: example;
+}
+
+header {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+img {
+  display: block;
+  max-height: 100%;
+}
+
+details {
+  width: 100%;
+
+  &::details-content {
+    padding: 0;
+    margin: 0;
+    height: 0;
+    overflow: hidden;
+    transition-property: height, content-visibility;
+    transition-duration: 500ms;
+    transition-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    transition-behavior: allow-discrete;
+  }
+
+  & > summary {
+    padding: 10px;
+    background-color: #1e90ff65;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-family: Arial;
+    cursor: pointer;
+    transition: background-color 300ms;
+    font-size: 1.2rem;
+    font-family: monospace;
+    counter-increment: example;
+
+    @media (width <= 300px) {
+      flex-direction: column;
+      text-align: center;
+
+      &::after {
+        margin: auto;
+      }
+    }
+
+    &:hover {
+      background-color: #1e90ff95;
+    }
+
+    &::marker {
+      content: none;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      font-weight: bolder;
+      background-color: #333;
+      width: 20px;
+      height: 20px;
+      border-radius: 100px;
+      text-align: center;
+      align-content: center;
+      transition: background-color 300ms;
+    }
+
+    &::after {
+      content: counter(example, decimal-leading-zero);
+      margin-inline-start: auto;
+      display: block;
+      font-size: 1.25rem;
+      font-weight: bolder;
+      text-align: center;
+      align-content: center;
+      border-radius: 100px;
+      background-color: dodgerblue;
+      padding: 7px;
+      border: 3px solid #333;
+    }
+  }
+
+  & > .content {
+    background-color: #1e90ff20;
+    margin: 0;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  &[open] {
+    &::details-content {
+      height: auto;
+    }
+
+    & > summary {
+      background-color: #1e90fff0;
+
+      &::before {
+        background-color: #f5f566;
+      }
+    }
+  }
+}
+
+fieldset {
+  padding: 15px;
+  border-radius: 5px;
+  border: 3px solid dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  &:nth-last-child(n + 2) {
+    margin-bottom: 20px;
+  }
+
+  & > legend {
+    border-radius: inherit;
+    padding: 7px;
+    background-color: dodgerblue;
+    font-size: 1rem;
+  }
+}
+
+.css-battle {
+  max-width: 500px;
+  aspect-ratio: 16/11;
+  margin: auto;
+
+  &.battle1 {
+    background-color: #324450;
+
+    & > :only-child {
+      width: 220px;
+      aspect-ratio: 1/0.8;
+      background-image: linear-gradient(#d44f56 70%, transparent 70%);
+      border-radius: 60% 60% 0 0 / 70% 70% 50% 50%;
+      position: relative;
+
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        translate: -50% -50%;
+        top: 75%;
+        left: 50%;
+      }
+
+      &::before {
+        --clip-value: 18.7%;
+        width: 160%;
+        aspect-ratio: 1/0.17;
+        background-color: #edac40;
+        clip-path: polygon(
+          0 100%,
+          calc(var(--clip-value)) 0,
+          calc(100% - var(--clip-value)) 0,
+          100% 100%
+        );
+      }
+
+      &::after {
+        --move: 120px;
+        top: 79%;
+        background-color: #d44f56;
+        width: 12%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        box-shadow: var(--move) 0 #d44f56, calc(var(--move) * -1) 0 #d44f56;
+      }
+    }
+  }
+
+  &.battle2-1 {
+    background-color: #b95551;
+
+    & > :last-child {
+      --w: 300px;
+      width: var(--w);
+      aspect-ratio: 1/0.5;
+      position: relative;
+
+      &::before,
+      &::after {
+        --gap: 10px;
+        --d: calc((var(--w) - (9 * var(--gap))) / 10);
+        content: "";
+        display: block;
+        position: absolute;
+        width: var(--d);
+        aspect-ratio: 1;
+      }
+
+      &::before {
+        background-color: #fff;
+        border-radius: 50%;
+
+        /* test */
+        /* height: 100%;
+        width: 1px;
+        left: 50%;
+        translate: -50% 0; */
+      }
+      &::after {
+        --col: #e1e062;
+        --move: calc((var(--d) + var(--gap)));
+        background-color: #e1e062;
+        right: 0;
+        border-radius: 20%;
+        box-shadow: calc(var(--move) * -1) 0 var(--col),
+          calc(var(--move) * -2) 0 var(--col),
+          calc(var(--move) * -3) 0 var(--col),
+          calc(var(--move) * -4) 0 var(--col), 0 var(--move) var(--col),
+          0 calc(var(--move) * 2) var(--col), 0 calc(var(--move) * 3) var(--col),
+          0 calc(var(--move) * 4) var(--col),
+          calc(var(--move) * -1) calc(var(--move) * 4) var(--col),
+          calc(var(--move) * -2) calc(var(--move) * 4) var(--col),
+          calc(var(--move) * -3) calc(var(--move) * 4) var(--col),
+          calc(var(--move) * -4) calc(var(--move) * 4) var(--col),
+          calc(var(--move) * -5) calc(var(--move) * 4) var(--col),
+          calc(var(--move) * -6) calc(var(--move) * 4) var(--col),
+          calc(var(--move) * -7) calc(var(--move) * 4) var(--col),
+          calc(var(--move) * -8) calc(var(--move) * 4) var(--col),
+          calc(var(--move) * -9) calc(var(--move) * 4) var(--col);
+      }
+    }
+  }
+  &.battle2-2 {
+    background-color: #b95551;
+
+    & > :last-child {
+      width: 75%;
+      min-width: 250px;
+      aspect-ratio: 1/0.5;
+      position: relative;
+      display: grid;
+      grid:
+        "c . . . . r1 r2 r3 r4 r5" 1fr
+        ". . . . . . . . . r6" 1fr
+        ". . . . . . . . . r7" 1fr
+        ". . . . . . . . . r8" 1fr
+        "r18 r17 r16 r15 r14 r13 r12 r11 r10 r9" 1fr
+        / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 7px;
+
+      & > * {
+        background-color: #e1e062;
+        border-radius: 20%;
+
+        &:first-child {
+          border-radius: 50%;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
